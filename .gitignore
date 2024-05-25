@@ -1,15 +1,13 @@
 # Backend
 /backend/env
-/backend/blog/__pycache__
-
 /backend/db.sqlite3
 
+/backend/blog/__pycache__
 /backend/user_api/__pycache__
 /backend/user_api/migrations
-
+/backend/user_api/urls/__pycache__
 
 # frontend
-
 # Logs
 /frontend/logs
 /frontend/*.log
