@@ -1,4 +1,4 @@
-# Blog
+# Blog [![MIT Licnese](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/license/mit)
 
 ## Declaration
 Technology used:
