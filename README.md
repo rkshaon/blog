@@ -1,13 +1,11 @@
 # Blog [![MIT Licnese](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/license/mit)
 
 ## Declaration
-Technology used:
-- Python
+Technology and Framework used:
+- Python3
 - JavaScript
-
-Framework used:
 - Django
-- Vue
+- Vue3
 
 ## Setup
 Open the terminal on the directory where you want to run, and then clone the project using the command below:

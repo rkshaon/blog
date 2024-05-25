@@ -3,3 +3,5 @@
 /backend/blog/__pycache__
 
 /backend/db.sqlite3
+/backend/user_api/__pycache__
+/backend/user_api/migrations
