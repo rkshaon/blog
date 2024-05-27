@@ -5,6 +5,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from user_api.models import User
+from blog_api.models import Blog
 
 from user_api.serializers import UserSerializer
 
@@ -96,7 +97,15 @@ class UserProfileView(APIView):
             }, status=status.HTTP_401_UNAUTHORIZED)
 
         serializer = UserSerializer(user)
+        data = serializer.data
+        data['blogs'] = {
+            'all': Blog.objects.all().count(),
+            'approved': Blog.objects.filter(author=user, is_approved=True).count(),
+            'pending': Blog.objects.filter(author=user, is_approved=False).count(),
+            'published': Blog.objects.filter(author=user, blog_status='published', is_approved=False).count(),
+            'draft': Blog.objects.filter(author=user, blog_status='draft', is_approved=False).count(),
+        }
         
-        return Response(serializer.data)
+        return Response(data)
     
 

@@ -6,6 +6,9 @@
 /backend/user_api/__pycache__
 /backend/user_api/migrations
 /backend/user_api/urls/__pycache__
+/backend/blog_api/__pycache__
+/backend/blog_api/migrations
+/backend/blog_api/urls/__pycache__
 
 # frontend
 # Logs
