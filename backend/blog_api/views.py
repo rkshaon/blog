@@ -18,7 +18,15 @@ class BlogView(APIView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        blogs = Blog.objects.filter(author=user, is_approved=True)
+        status = request.GET.get('status')
+
+        if status:
+            if status.lower() == 'approved':
+                blogs = Blog.objects.filter(author=user, is_approved=True)
+            elif status.lower() == 'pending':
+                blogs = Blog.objects.filter(author=user, is_approved=False)
+        else:
+            blogs = Blog.objects.filter(author=user, is_approved=True)
         
         return Response(self.serializer_class(blogs, many=True).data)
     
