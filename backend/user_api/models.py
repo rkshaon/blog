@@ -29,16 +29,14 @@ class User(AbstractUser, PermissionsMixin):
     username = models.CharField(max_length=50, unique=True)
     role = models.CharField(
         max_length=20, choices=ROLE_CHOICES, default='blogger')
-    # is_active = models.BooleanField(default=True)
-    # is_staff = models.BooleanField(default=False)
     added_date_time = models.DateTimeField(auto_now_add=True)
     updated_date_time = models.DateTimeField(auto_now=True)
+    is_private = models.BooleanField(default=False)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'role']
-
 
     def __str__(self):
         return self.email
