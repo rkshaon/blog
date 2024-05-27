@@ -2,9 +2,10 @@
 	"info": {
 		"_postman_id": "ce7b5d40-a5cf-4f5b-b597-8232f7f91c9d",
 		"name": "The Blog",
+		"description": "The Blog project is the reflection of skill set on Python, Django.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "5659583",
-		"_collection_link": "https://warped-desert-817292.postman.co/workspace/2f173f7b-24fa-4af4-a274-59807a4ad602/collection/5659583-ce7b5d40-a5cf-4f5b-b597-8232f7f91c9d?action=share&source=collection_link&creator=5659583"
+		"_collection_link": "https://warped-desert-817292.postman.co/workspace/personal-work~2f173f7b-24fa-4af4-a274-59807a4ad602/collection/5659583-ce7b5d40-a5cf-4f5b-b597-8232f7f91c9d?action=share&source=collection_link&creator=5659583"
 	},
 	"item": [
 		{
@@ -17,7 +18,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"rifat\",\n    \"email\": \"rifat@gmail.com\",\n    \"password\": \"rifat\",\n    \"role\": \"blogger\"\n}",
+							"raw": "{\n    \"username\": \"hasib\",\n    \"email\": \"hasib@gmail.com\",\n    \"password\": \"hasib\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -38,6 +39,64 @@
 							]
 						},
 						"description": "User registration API v1"
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"credential\": \"rifat\",\n    \"password\": \"rifat\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/login/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"login",
+								""
+							]
+						},
+						"description": "User login API v1"
+					},
+					"response": []
+				},
+				{
+					"name": "User Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/profile/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"profile",
+								""
+							]
+						}
 					},
 					"response": []
 				}
@@ -71,6 +130,11 @@
 		{
 			"key": "base_url",
 			"value": "http://10.10.10.84:8000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE2Nzk4MjU2LCJpYXQiOjE3MTY3OTc5NTYsImp0aSI6IjI2MTQyNGExOGNkNjRmZTc5ODhlZWJiNjYyNzAwY2RkIiwidXNlcl9pZCI6M30.yh8kR01ipdG3MZ9ip1EB6c7AGnrTrZ8szqaQZ9QryWA",
 			"type": "string"
 		}
 	]

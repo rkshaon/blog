@@ -65,3 +65,17 @@ class UserLoginView(APIView):
             })
         else:
             return Response({'detail': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+class UserProfileView(APIView):
+    def get(self, request):
+        user = request.user
+
+        if user.is_anonymous:
+            return Response({
+                'detail': 'Authentication credentials were not provided.'
+            }, status=status.HTTP_401_UNAUTHORIZED)
+
+        serializer = UserSerializer(user)
+        
+        return Response(serializer.data)
