@@ -79,6 +79,7 @@ class UserProfileView(APIView):
                     'details': 'User not found',
                 }, status=status.HTTP_404_NOT_FOUND)
             
+            print(user.is_private)
             serializer = UserSerializer(user)
 
             return Response(serializer.data)
