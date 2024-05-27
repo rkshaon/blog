@@ -10,7 +10,7 @@ from user_api.serializers import UserSerializer
 
 
 class UserRegistrationView(APIView):
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         request.data['role'] = 'blogger'
         serializer = UserSerializer(data=request.data)
 
@@ -27,7 +27,7 @@ class UserRegistrationView(APIView):
 class UserLoginView(APIView):
     permission_classes = [AllowAny]
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         credential = request.data.get('credential')
         password = request.data.get('password')
 
@@ -65,17 +65,33 @@ class UserLoginView(APIView):
             })
         else:
             return Response({'detail': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
-
+        
 
 class UserProfileView(APIView):
-    def get(self, request):
-        user = request.user
+    def get(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
 
+        if pk:
+            try:
+                user = User.objects.get(pk=pk)
+            except User.DoesNotExist:
+                return Response({
+                    'details': 'User not found',
+                }, status=status.HTTP_404_NOT_FOUND)
+            
+            serializer = UserSerializer(user)
+
+            return Response(serializer.data)
+    
+        user = request.user
+        
         if user.is_anonymous:
             return Response({
-                'detail': 'Authentication credentials were not provided.'
+                'details': 'User is not authenticated',
             }, status=status.HTTP_401_UNAUTHORIZED)
 
         serializer = UserSerializer(user)
         
         return Response(serializer.data)
+    
+
