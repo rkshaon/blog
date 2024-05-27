@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "ce7b5d40-a5cf-4f5b-b597-8232f7f91c9d",
+		"name": "The Blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5659583",
+		"_collection_link": "https://warped-desert-817292.postman.co/workspace/2f173f7b-24fa-4af4-a274-59807a4ad602/collection/5659583-ce7b5d40-a5cf-4f5b-b597-8232f7f91c9d?action=share&source=collection_link&creator=5659583"
+	},
+	"item": [
+		{
+			"name": "API V1",
+			"item": [
+				{
+					"name": "User Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"rifat\",\n    \"email\": \"rifat@gmail.com\",\n    \"password\": \"rifat\",\n    \"role\": \"blogger\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/register/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"register",
+								""
+							]
+						},
+						"description": "User registration API v1"
+					},
+					"response": []
+				}
+			],
+			"description": "API _v1_ of The **Blog project**"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://10.10.10.84:8000",
+			"type": "string"
+		}
+	]
+}
