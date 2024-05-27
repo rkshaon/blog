@@ -79,7 +79,11 @@ class UserProfileView(APIView):
                     'details': 'User not found',
                 }, status=status.HTTP_404_NOT_FOUND)
             
-            print(user.is_private)
+            if user.is_private and request.user.is_anonymous:
+                return Response({
+                    'details': 'User is not authenticated',
+                }, status=status.HTTP_401_UNAUTHORIZED)
+            
             serializer = UserSerializer(user)
 
             return Response(serializer.data)
