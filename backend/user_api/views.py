@@ -9,6 +9,7 @@ from user_api.serializers import UserSerializer
 
 class UserRegistrationView(APIView):
     def post(self, request):
+        request.data['role'] = 'blogger'
         serializer = UserSerializer(data=request.data)
 
         if serializer.is_valid():
