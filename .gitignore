@@ -27,8 +27,8 @@
 /frontend_vue/coverage
 /frontend_vue/*.local
 
-/frontend_vue//cypress/videos/
-/frontend_vue//cypress/screenshots/
+/frontend_vue/cypress/videos/
+/frontend_vue/cypress/screenshots/
 
 # Editor directories and files
 /frontend_vue/.vscode/*
