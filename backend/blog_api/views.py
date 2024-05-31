@@ -50,4 +50,16 @@ class BlogArchiveView(APIView):
     serializer_class = BlogSerializer
 
     def post(self, request, *args, **kwargs):
-        return Response({})
+        pk = kwargs.get('pk', None)
+        
+        try:
+            blog = Blog.objects.exclude(blog_status='archive').get(pk=pk)
+            print(blog)
+        except Blog.DoesNotExist:
+            return Response({
+                'error': 'Blog does not exist.'
+            }, status=status.HTTP_404_NOT_FOUND)
+        
+        return Response({
+            "message": "Blog archived successfully.",
+        })
