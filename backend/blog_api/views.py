@@ -26,7 +26,14 @@ class BlogView(APIView):
         if pk:
             try:
                 blog = Blog.objects.get(pk=pk, is_approved=True, is_deleted=False)
-                return Response(self.serializer_class(blog).data)
+                data = self.serializer_class(blog).data
+                
+                data['comments'] = BlogCommentSerializer(
+                    BlogComment.objects.filter(blog=blog, is_deleted=False), 
+                    many=True
+                    ).data
+                
+                return Response(data)
             
             except Blog.DoesNotExist:
                 return Response({
