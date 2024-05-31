@@ -6,8 +6,10 @@ from rest_framework import status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from blog_api.models import Blog
+from blog_api.models import BlogComment
 
 from blog_api.serializers import BlogSerializer
+from blog_api.serializers import BlogCommentSerializer
 
 
 
@@ -18,12 +20,30 @@ class BlogView(APIView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        status = request.GET.get('status')
+        blog_status = request.GET.get('status')
+        pk = kwargs.get('pk', None)
 
-        if status:
-            if status.lower() == 'approved':
+        if pk:
+            try:
+                blog = Blog.objects.get(pk=pk, is_approved=True, is_deleted=False)
+                data = self.serializer_class(blog).data
+                
+                data['comments'] = BlogCommentSerializer(
+                    BlogComment.objects.filter(blog=blog, is_deleted=False), 
+                    many=True
+                    ).data
+                
+                return Response(data)
+            
+            except Blog.DoesNotExist:
+                return Response({
+                    'error': 'Blog does not exist.'
+                }, status=status.HTTP_404_NOT_FOUND)
+            
+        if blog_status:
+            if blog_status.lower() == 'approved':
                 blogs = Blog.objects.filter(author=user, is_approved=True, is_deleted=False)
-            elif status.lower() == 'pending':
+            elif blog_status.lower() == 'pending':
                 blogs = Blog.objects.filter(author=user, is_approved=False, is_deleted=False)
         else:
             blogs = Blog.objects.filter(author=user, is_approved=True, is_deleted=False)
@@ -109,3 +129,22 @@ class BlogUnarchiveView(APIView):
         return Response({
             'message': 'Blog unarchived successfully.',
         })
+
+
+class BlogCommentView(APIView):
+    authentication_classes = [SessionAuthentication, JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    serializer_class = BlogCommentSerializer
+
+    def post(self, request, *args, **kwargs):
+        temp_data = request.data.copy()
+        temp_data['commentor'] = request.user.id
+
+        serializer = self.serializer_class(data=temp_data)
+
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            return Response(serializer.errors)
+        
+        return Response(serializer.data)
