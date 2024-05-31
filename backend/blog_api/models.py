@@ -25,6 +25,7 @@ class Blog(models.Model):
         null=True, 
         related_name='approver')
 
+    is_deleted = models.BooleanField(default=False)
     added_date_time = models.DateTimeField(auto_now_add=True)
     updated_date_time = models.DateTimeField(auto_now=True)
 
