@@ -22,11 +22,11 @@ class BlogView(APIView):
 
         if status:
             if status.lower() == 'approved':
-                blogs = Blog.objects.filter(author=user, is_approved=True)
+                blogs = Blog.objects.filter(author=user, is_approved=True, is_deleted=False)
             elif status.lower() == 'pending':
-                blogs = Blog.objects.filter(author=user, is_approved=False)
+                blogs = Blog.objects.filter(author=user, is_approved=False, is_deleted=False)
         else:
-            blogs = Blog.objects.filter(author=user, is_approved=True)
+            blogs = Blog.objects.filter(author=user, is_approved=True, is_deleted=False)
         
         return Response(self.serializer_class(blogs, many=True).data)
     
@@ -42,6 +42,25 @@ class BlogView(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
+    
+
+    def delete(self, request, *args, **kwargs):
+        user = request.user
+        pk = kwargs.get('pk', None)
+
+        try:
+            blog = Blog.objects.get(pk=pk, author=user, is_deleted=False)
+            blog.is_deleted = True
+            blog.save()
+
+        except Blog.DoesNotExist:
+            return Response({
+                'error': 'Blog does not exist.'
+            }, status=status.HTTP_404_NOT_FOUND)
+
+        return Response({
+            "message": "Blog deleted successfully.",
+        })
 
 
 class BlogArchiveView(APIView):
@@ -54,7 +73,7 @@ class BlogArchiveView(APIView):
         pk = kwargs.get('pk', None)
         
         try:
-            blog = Blog.objects.exclude(blog_status='archive').get(pk=pk, author=user)
+            blog = Blog.objects.exclude(blog_status='archive').get(pk=pk, author=user, is_deleted=False)
             blog.blog_status = 'archive'
             blog.save()
             
@@ -78,7 +97,7 @@ class BlogUnarchiveView(APIView):
         pk = kwargs.get('pk', None)
 
         try:
-            blog = Blog.objects.get(pk=pk, blog_status='archive', author=user)
+            blog = Blog.objects.get(pk=pk, blog_status='archive', author=user, is_deleted=False)
             blog.blog_status = 'draft'
             blog.save()
 
