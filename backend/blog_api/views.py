@@ -50,10 +50,13 @@ class BlogArchiveView(APIView):
     serializer_class = BlogSerializer
 
     def post(self, request, *args, **kwargs):
+        user = request.user
         pk = kwargs.get('pk', None)
         
         try:
-            blog = Blog.objects.exclude(blog_status='archive').get(pk=pk)
+            blog = Blog.objects.exclude(blog_status='archive').get(pk=pk, author=user)
+            blog.blog_status = 'archive'
+            blog.save()
             
         except Blog.DoesNotExist:
             return Response({
