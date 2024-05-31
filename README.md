@@ -6,6 +6,7 @@ Technology and Framework used:
 - JavaScript
 - Django
 - Vue3
+- Reactjs
 
 ## Setup
 Open the terminal on the directory where you want to run, and then clone the project using the command below:
