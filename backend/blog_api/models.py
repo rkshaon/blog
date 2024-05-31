@@ -6,6 +6,7 @@ class Blog(models.Model):
     BLOG_STATUS_CHOICES = (
         ('draft', 'Draft'),
         ('published', 'Published'),
+        ('archive', 'Archive'),
     )
 
     author = models.ForeignKey(

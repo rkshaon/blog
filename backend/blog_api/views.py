@@ -34,7 +34,7 @@ class BlogView(APIView):
     def post(self, request, *args, **kwargs):
         temp_data = request.data.copy()
         temp_data['author'] = request.user.id
-        print(temp_data)
+        
         serializer = self.serializer_class(data=temp_data)
         
         if serializer.is_valid():
@@ -42,4 +42,48 @@ class BlogView(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
+
+
+class BlogArchiveView(APIView):
+    authentication_classes = [SessionAuthentication, JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    serializer_class = BlogSerializer
+
+    def post(self, request, *args, **kwargs):
+        pk = kwargs.get('pk', None)
         
+        try:
+            blog = Blog.objects.exclude(blog_status='archive').get(pk=pk)
+            
+        except Blog.DoesNotExist:
+            return Response({
+                'error': 'Blog does not exist.'
+            }, status=status.HTTP_404_NOT_FOUND)
+        
+        return Response({
+            "message": "Blog archived successfully.",
+        })
+
+
+class BlogUnarchiveView(APIView):
+    authentication_classes = [SessionAuthentication, JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    serializer_class = BlogSerializer
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        pk = kwargs.get('pk', None)
+
+        try:
+            blog = Blog.objects.get(pk=pk, blog_status='archive', author=user)
+            blog.blog_status = 'draft'
+            blog.save()
+
+        except Blog.DoesNotExist:
+            return Response({
+                'error': 'Blog does not exist.'
+            }, status=status.HTTP_404_NOT_FOUND)
+        
+        return Response({
+            'message': 'Blog unarchived successfully.',
+        })

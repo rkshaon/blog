@@ -115,7 +115,7 @@ class RefreshTokenView(APIView):
 
     def post(self, request):
         refresh = request.data.get('refresh')
-        print(refresh)
+        
         try:
             # Attempt to verify the refresh token
             token = RefreshToken(refresh)
