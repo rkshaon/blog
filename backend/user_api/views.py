@@ -108,5 +108,37 @@ class UserProfileView(APIView):
         }
         
         return Response(data)
+
+
+class RefreshTokenView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        refresh = request.data.get('refresh')
+        
+        try:
+            # Attempt to verify the refresh token
+            token = RefreshToken(refresh)
+            # token.blacklist()  # Revoke the old refresh token
+            # outstanding_token = OutstandingToken.objects.get(token=str(token))
+            # outstanding_token.blacklist()  # Revoke the token
+
+            # Generate a new access token
+            new_access_token = token.access_token
+            
+            return Response({
+                'status': True,
+                'data': {
+                    'access': str(new_access_token),
+                }
+            })
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+            return Response({
+                'status': False,
+                'errors': ['Invalid refresh token'],
+            }, status=status.HTTP_401_UNAUTHORIZED)
     
 
