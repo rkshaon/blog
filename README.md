@@ -15,7 +15,8 @@ git clone git@github.com:rkshaon/blog.git
 ```
 
 #### [Setup Backend](./backend/README.md)
-#### [Setup Frontend](./frontend/README.md)
+#### [Setup Frontend React.js](./frontend_react/README.md)
+#### [Setup Frontend Vue.js](./frontend_vue/README.md)
 
 ## Contribution
 Contributions are always welcomed. Feel free to raise new issues, file new PRs. Consider giving it a star and fork this repo!
