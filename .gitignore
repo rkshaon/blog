@@ -12,35 +12,35 @@
 
 # frontend
 # Logs
-/frontend/logs
-/frontend/*.log
-/frontend/npm-debug.log*
-/frontend/yarn-debug.log*
-/frontend/yarn-error.log*
-/frontend/pnpm-debug.log*
-/frontend/lerna-debug.log*
+/frontend_vue/logs
+/frontend_vue/*.log
+/frontend_vue/npm-debug.log*
+/frontend_vue/yarn-debug.log*
+/frontend_vue/yarn-error.log*
+/frontend_vue/pnpm-debug.log*
+/frontend_vue/lerna-debug.log*
 
-/frontend/node_modules
-/frontend/.DS_Store
-/frontend/dist
-/frontend/dist-ssr
-/frontend/coverage
-/frontend/*.local
+/frontend_vue/node_modules
+/frontend_vue/.DS_Store
+/frontend_vue/dist
+/frontend_vue/dist-ssr
+/frontend_vue/coverage
+/frontend_vue/*.local
 
-/frontend//cypress/videos/
-/frontend//cypress/screenshots/
+/frontend_vue//cypress/videos/
+/frontend_vue//cypress/screenshots/
 
 # Editor directories and files
-/frontend/.vscode/*
-/frontend/!.vscode/extensions.json
-/frontend/.idea
-/frontend/*.suo
-/frontend/*.ntvs*
-/frontend/*.njsproj
-/frontend/*.sln
-/frontend/*.sw?
+/frontend_vue/.vscode/*
+/frontend_vue/!.vscode/extensions.json
+/frontend_vue/.idea
+/frontend_vue/*.suo
+/frontend_vue/*.ntvs*
+/frontend_vue/*.njsproj
+/frontend_vue/*.sln
+/frontend_vue/*.sw?
 
-/frontend/*.tsbuildinfo
+/frontend_vue/*.tsbuildinfo
 
 
 
