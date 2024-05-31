@@ -34,7 +34,7 @@ class BlogView(APIView):
     def post(self, request, *args, **kwargs):
         temp_data = request.data.copy()
         temp_data['author'] = request.user.id
-        print(temp_data)
+        
         serializer = self.serializer_class(data=temp_data)
         
         if serializer.is_valid():
@@ -42,4 +42,12 @@ class BlogView(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
-        
+
+
+class BlogArchiveView(APIView):
+    authentication_classes = [SessionAuthentication, JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    serializer_class = BlogSerializer
+
+    def post(self, request, *args, **kwargs):
+        return Response({})
