@@ -20,12 +20,23 @@ class BlogView(APIView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        status = request.GET.get('status')
+        blog_status = request.GET.get('status')
+        pk = kwargs.get('pk', None)
 
-        if status:
-            if status.lower() == 'approved':
+        if pk:
+            try:
+                blog = Blog.objects.get(pk=pk, is_approved=True, is_deleted=False)
+                return Response(self.serializer_class(blog).data)
+            
+            except Blog.DoesNotExist:
+                return Response({
+                    'error': 'Blog does not exist.'
+                }, status=status.HTTP_404_NOT_FOUND)
+            
+        if blog_status:
+            if blog_status.lower() == 'approved':
                 blogs = Blog.objects.filter(author=user, is_approved=True, is_deleted=False)
-            elif status.lower() == 'pending':
+            elif blog_status.lower() == 'pending':
                 blogs = Blog.objects.filter(author=user, is_approved=False, is_deleted=False)
         else:
             blogs = Blog.objects.filter(author=user, is_approved=True, is_deleted=False)
