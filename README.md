@@ -1,4 +1,7 @@
-# Blog [![MIT Licnese](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/license/mit)
+# Blog 
+[![MIT Licnese](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/license/mit)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/rkshaon/blog)
+
 
 ## Declaration
 Technology and Framework used:
