@@ -20,3 +20,4 @@ class BlogCommentAdmin(admin.ModelAdmin):
     list_filter = ('commentor',)
     search_fields = ('comment', )
     readonly_fields = ('id', )
+
