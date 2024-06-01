@@ -19,7 +19,7 @@ class RatingView(APIView):
         temp_data = request.data.copy()
         temp_data['rater'] = request.user.id
 
-        serializer = self.serializer_class(data=temp_data)
+        serializer = self.serializer_class(data=temp_data, context={'request': request})
 
         if serializer.is_valid():
             serializer.save()

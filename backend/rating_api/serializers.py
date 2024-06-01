@@ -5,6 +5,11 @@ from rating_api.models import Rating
 
 
 class RatingSerializer(serializers.ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('context', {}).get('request')
+        super().__init__(*args, **kwargs)
+
+
     def validate(self, data):
         blog = data.get('blog')
 
@@ -17,10 +22,10 @@ class RatingSerializer(serializers.ModelSerializer):
 
             if not blog.is_approved:
                 raise serializers.ValidationError('The blog is not approved yet.')
-        
-        user = self.context['request'].user
+            
+        user = self.request.user
 
-        if Rating.objects.filter(blog=blog, user=user).exists():
+        if Rating.objects.filter(blog=blog, rater=user).exists():
             raise serializers.ValidationError(
                 "You have already rated this blog.")
         
