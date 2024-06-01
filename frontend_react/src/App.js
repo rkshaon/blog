@@ -1,9 +1,11 @@
 import './App.css';
+import Layout from './components/Layout';
+
 
 function App() {
   return (
     <>
-     Welcome to our blog
+     <Layout />
     </>
   );
 }
