@@ -114,10 +114,10 @@ REST_FRAMEWORK = {
     )
 }
 
-# SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME': 3600,
-# }
-JWT_EXPIRATION_DELTA = datetime.timedelta(hours=1)
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=1),
+}
+# JWT_EXPIRATION_DELTA = datetime.timedelta(hours=1)
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
