@@ -145,3 +145,5 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 AUTH_USER_MODEL = 'user_api.User'
+
+APPEND_SLASH = False
