@@ -1,5 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
+import LeftSidebar from './LeftSidebar';
+import Footer from './Footer';
 
 const Layout = ({ children }) => (
   <div className="min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-1 md:grid-cols-3 md:grid-rows-[repeat(12,_min-content)] gap-2 p-2">
@@ -7,13 +9,13 @@ const Layout = ({ children }) => (
       <Navbar />
     </header>
     <nav className="md:row-span-[10] md:col-span-1">
-      navigation
+      <LeftSidebar />
     </nav>
     <main className="md:row-span-[10] md:col-span-2">
       {children}
     </main>
     <footer className="col-span-full">
-      footer
+      <Footer />
     </footer>
   </div>
 );
