@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 from blog_api.models import Blog
-# from blog_api.models import BlogComment
 
 
 
@@ -14,10 +13,5 @@ class BlogAdmin(admin.ModelAdmin):
     readonly_fields = ('id',)
 
 
-# @admin.register(BlogComment)
-# class BlogCommentAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'blog', 'commentor', 'comment', 'is_deleted')
-#     list_filter = ('commentor',)
-#     search_fields = ('comment', )
-#     readonly_fields = ('id', )
+
 

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'user_api',
     'blog_api',
+    'comment_api',
 ]
 
 MIDDLEWARE = [
