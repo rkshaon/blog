@@ -7,7 +7,7 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
@@ -23,7 +23,7 @@ const SignIn = () => {
     // Handle form submission logic here
     try {
       let signIninfo = {
-        credetial: identifier,
+        credential: identifier,
         password: password
       }
     
@@ -34,9 +34,11 @@ const SignIn = () => {
         },
         body: JSON.stringify(signIninfo),
       });
+      console.log('response', response);
 
       if (!response.ok) {
-        throw new Error('Failed to sign in');
+        const errorData = await response.json();
+        throw new Error(errorData.errors ? errorData.errors.join(', ') : 'Failed to sign in');
       }
 
       const data = await response.json();
@@ -46,7 +48,8 @@ const SignIn = () => {
       // Handle successful sign-in (e.g., store token, etc.)
 
     } catch (err) {
-      setError(err.message);
+      console.log('login error', err);
+      setErrors(err.message.split(', '));
     }
     
 
@@ -60,6 +63,14 @@ const SignIn = () => {
     <div className="flex items-center justify-center min-h-screen">
       <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold text-white mb-6 text-center">Sign In</h2>
+        {errors.length > 0 && (
+          <div className="mb-2 text-red-500">
+            {errors.map((error, index) => (
+              <div key={index}>{error}</div>
+            ))}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-300 mb-2">Email or Username</label>
