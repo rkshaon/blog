@@ -147,6 +147,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "http://192.168.31.220:8000",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://192.168.31.220:3000",
 ]
 
 AUTH_USER_MODEL = 'user_api.User'
