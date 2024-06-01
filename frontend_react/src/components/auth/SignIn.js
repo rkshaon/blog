@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 const SignIn = () => {
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    console.log('Email:', email);
+    console.log('Identifier (Email/Username):', identifier);
     console.log('Password:', password);
   };
 
@@ -22,12 +22,13 @@ const SignIn = () => {
         <h2 className="text-2xl font-bold text-white mb-6 text-center">Sign In</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-300 mb-2">Email</label>
+            <label htmlFor="email" className="block text-gray-300 mb-2">Email or Username</label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              id="identifier"
+              value={identifier}
+              placeholder="Email or Username"
+              onChange={(e) => setIdentifier(e.target.value)}
               className="w-full p-3 rounded bg-gray-700 text-white focus:outline-none focus:bg-gray-600"
               required
             />
@@ -38,6 +39,7 @@ const SignIn = () => {
               type={showPassword ? 'text' : 'password'}
               id="password"
               value={password}
+              placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-3 rounded bg-gray-700 text-white focus:outline-none focus:bg-gray-600"
               required
