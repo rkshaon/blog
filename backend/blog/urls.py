@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/v1/user/', include('user_api.urls.v1')),
     path('api/v1/blog/', include('blog_api.urls.v1')),
     path('api/v1/comment/', include('comment_api.urls.v1')),
+    path('api/v1/rating/', include('rating_api.urls.v1')),
 ]
