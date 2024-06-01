@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const LeftSidebar = () => {
   return (
-    <aside className="p-4 w-full md:w-64 border">
+    <aside className="p-4 w-full h-full border">
       <h2 className="text-xl font-semibold mb-4">Navigation</h2>
       <ul>
         <li className="mb-2">
