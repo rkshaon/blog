@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from blog_api.models import Blog
-from blog_api.models import BlogComment
+# from blog_api.models import BlogComment
 
 from user_api.serializers import UserSerializer
 
@@ -22,24 +22,24 @@ class BlogSerializer(serializers.ModelSerializer):
         return representation
 
 
-class BlogCommentSerializer(serializers.ModelSerializer):
-    def validate(self, data):
-        blog = data.get('blog')
+# class BlogCommentSerializer(serializers.ModelSerializer):
+#     def validate(self, data):
+#         blog = data.get('blog')
 
-        if blog:
-            if blog.is_deleted is True:
-                raise serializers.ValidationError("The blog is deleted.")
+#         if blog:
+#             if blog.is_deleted is True:
+#                 raise serializers.ValidationError("The blog is deleted.")
             
-            if blog.blog_status != 'published':
-                raise serializers.ValidationError("The blog is not published yet.")
+#             if blog.blog_status != 'published':
+#                 raise serializers.ValidationError("The blog is not published yet.")
             
-            if not blog.is_approved:
-                raise serializers.ValidationError(
-                    "The blog is not approved yet.")
+#             if not blog.is_approved:
+#                 raise serializers.ValidationError(
+#                     "The blog is not approved yet.")
             
-        return data
+#         return data
     
 
-    class Meta:
-        fields = '__all__'
-        model = BlogComment
+#     class Meta:
+#         fields = '__all__'
+#         model = BlogComment

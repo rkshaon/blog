@@ -6,10 +6,10 @@ from rest_framework import status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from blog_api.models import Blog
-from blog_api.models import BlogComment
+# from blog_api.models import BlogComment
 
 from blog_api.serializers import BlogSerializer
-from blog_api.serializers import BlogCommentSerializer
+# from blog_api.serializers import BlogCommentSerializer
 
 
 
@@ -28,10 +28,10 @@ class BlogView(APIView):
                 blog = Blog.objects.get(pk=pk, is_approved=True, is_deleted=False)
                 data = self.serializer_class(blog).data
                 
-                data['comments'] = BlogCommentSerializer(
-                    BlogComment.objects.filter(blog=blog, is_deleted=False), 
-                    many=True
-                    ).data
+                # data['comments'] = BlogCommentSerializer(
+                #     BlogComment.objects.filter(blog=blog, is_deleted=False), 
+                #     many=True
+                #     ).data
                 
                 return Response(data)
             
@@ -131,20 +131,20 @@ class BlogUnarchiveView(APIView):
         })
 
 
-class BlogCommentView(APIView):
-    authentication_classes = [SessionAuthentication, JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-    serializer_class = BlogCommentSerializer
+# class BlogCommentView(APIView):
+#     authentication_classes = [SessionAuthentication, JWTAuthentication]
+#     permission_classes = [IsAuthenticated]
+#     serializer_class = BlogCommentSerializer
 
-    def post(self, request, *args, **kwargs):
-        temp_data = request.data.copy()
-        temp_data['commentor'] = request.user.id
+#     def post(self, request, *args, **kwargs):
+#         temp_data = request.data.copy()
+#         temp_data['commentor'] = request.user.id
 
-        serializer = self.serializer_class(data=temp_data)
+#         serializer = self.serializer_class(data=temp_data)
 
-        if serializer.is_valid():
-            serializer.save()
-        else:
-            return Response(serializer.errors)
+#         if serializer.is_valid():
+#             serializer.save()
+#         else:
+#             return Response(serializer.errors)
         
-        return Response(serializer.data)
+#         return Response(serializer.data)
