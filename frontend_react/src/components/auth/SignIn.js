@@ -1,15 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (isSignedIn) {
+      // Redirect to the home page or another page after successful sign-in
+      navigate('/');
+    }
+  }, [isSignedIn, navigate]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    console.log('Identifier (Email/Username):', identifier);
-    console.log('Password:', password);
+    try {
+      let signIninfo = {
+        credetial: identifier,
+        password: password
+      }
+      
+      const response = await fetch('http://127.0.0.1:8000/api/v1/user/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(signIninfo),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to sign in');
+      }
+
+      const data = await response.json();
+      console.log('Sign in successful', data);
+      setIsSignedIn(true);  // Update the state to indicate a successful sign-in
+      // Handle successful sign-in (e.g., store token, etc.)
+
+    } catch (err) {
+      setError(err.message);
+    }
+    
+
   };
 
   const togglePasswordVisibility = () => {
