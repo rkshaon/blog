@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'user_api',
     'blog_api',
     'comment_api',
+    'rating_api',
 ]
 
 MIDDLEWARE = [
@@ -113,10 +114,10 @@ REST_FRAMEWORK = {
     )
 }
 
-# SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME': 3600,
-# }
-JWT_EXPIRATION_DELTA = datetime.timedelta(hours=1)
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=1),
+}
+# JWT_EXPIRATION_DELTA = datetime.timedelta(hours=1)
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -145,3 +146,5 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 AUTH_USER_MODEL = 'user_api.User'
+
+APPEND_SLASH = False

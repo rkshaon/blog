@@ -1,17 +1,22 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 
-class Comment(models.Model):
-    blog = models.ForeignKey('blog_api.Blog',
+class Rating(models.Model):
+    blog = models.ForeignKey(
+        'blog_api.Blog',
         on_delete=models.CASCADE,
-        related_name='blog_comment',
+        related_name='blog_rating',
     )
-    commentor = models.ForeignKey('user_api.User',
+    rater = models.ForeignKey(
+        'user_api.User',
         on_delete=models.CASCADE,
-        related_name='commentor'
+        related_name='rater',
     )
-    comment = models.CharField(max_length=255, blank=False, null=False)
+    rating = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+    )
     is_deleted = models.BooleanField(default=False)
     added_date_time = models.DateTimeField(auto_now_add=True)
     updated_date_time = models.DateTimeField(auto_now=True)
@@ -21,7 +26,8 @@ class Comment(models.Model):
             super().save(*args, **kwargs)
         else:
             raise ValueError('The blog is not published or approved yet.')
+        
 
-    
     def __str__(self) -> str:
-        return f"{self.blog.title} - {self.blog.author.username}: {self.commentor.username}: {self.comment}"
+        return f"{self.blog.title} - {self.blog.author.username}: {self.rater.username} - {self.rating}"
+

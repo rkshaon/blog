@@ -6,8 +6,10 @@ from rest_framework import status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from blog_api.models import Blog
+from comment_api.models import Comment
 
 from blog_api.serializers import BlogSerializer
+from comment_api.serializers import CommentSerializer
 
 
 
@@ -26,10 +28,10 @@ class BlogView(APIView):
                 blog = Blog.objects.get(pk=pk, is_approved=True, is_deleted=False)
                 data = self.serializer_class(blog).data
                 
-                # data['comments'] = BlogCommentSerializer(
-                #     BlogComment.objects.filter(blog=blog, is_deleted=False), 
-                #     many=True
-                #     ).data
+                data['comments'] = CommentSerializer(
+                    Comment.objects.filter(blog=blog, is_deleted=False), 
+                    many=True
+                    ).data
                 
                 return Response(data)
             

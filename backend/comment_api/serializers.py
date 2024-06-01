@@ -2,6 +2,8 @@ from rest_framework import serializers
 
 from comment_api.models import Comment
 
+from user_api.serializers import UserSerializer
+
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -25,3 +27,13 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
         model = Comment
+
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        if instance.commentor:
+            representation['commentor'] = UserSerializer(
+                instance.commentor).data
+        
+        return representation
