@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const SignIn = () => {
   const [identifier, setIdentifier] = useState('');
@@ -7,7 +8,8 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [error, setError] = useState('');
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
   useEffect(() => {
     if (isSignedIn) {
@@ -24,7 +26,7 @@ const SignIn = () => {
         credetial: identifier,
         password: password
       }
-      
+    
       const response = await fetch('http://127.0.0.1:8000/api/v1/user/login/', {
         method: 'POST',
         headers: {
@@ -39,6 +41,7 @@ const SignIn = () => {
 
       const data = await response.json();
       console.log('Sign in successful', data);
+      setCookie('token', data.token, { path: '/', expires: new Date(Date.now() + 604800000) });
       setIsSignedIn(true);  // Update the state to indicate a successful sign-in
       // Handle successful sign-in (e.g., store token, etc.)
 
