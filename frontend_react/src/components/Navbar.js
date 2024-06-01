@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleProfileMenu = () => {
+    setIsProfileOpen(!isProfileOpen);
   };
 
   return (
@@ -17,8 +22,8 @@ const Navbar = () => {
         </div>
         <div className="flex items-center space-x-4">
           <div className="hidden md:flex space-x-4">
-            <a href="#" className="hover:text-gray-300">Home</a>
-            <a href="#" className="hover:text-gray-300">Blog Details</a>
+            <a href="/" className="hover:text-gray-300">Home</a>
+            <a href="/blog" className="hover:text-gray-300">Blog</a>
           </div>
           <div className="relative">
             <button onClick={toggleMenu} className="focus:outline-none md:hidden">
@@ -28,19 +33,19 @@ const Navbar = () => {
             </button>
             {isOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20 md:hidden">
-                <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</a>
-                <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Blog Details</a>
+                <a href="/" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</a>
+                <a href="/blog" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Blog</a>
 
                 <div className="border-t my-2"></div>
                 
                 {isLoggedIn?
                 <div>
-                    <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
-                    <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
+                    <a href="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
+                    <a href="/settings" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
                     <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
                 </div>
                 : 
-                    <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Login</a>
+                    <a href="/signin" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Login</a>
                     }
               </div>
             )}
@@ -48,19 +53,19 @@ const Navbar = () => {
           <div className="relative hidden md:block">
           {!isLoggedIn ?
             <div className="hidden md:flex space-x-4">
-                <a href="#" className="hover:text-gray-300">Login</a>
+                <a href="/signin" className="hover:text-gray-300">Login</a>
             </div>
             :
             <>
-                <button onClick={toggleMenu} className="focus:outline-none flex items-center space-x-2">
+                <button onClick={toggleProfileMenu} className="focus:outline-none flex items-center space-x-2">
                 <img src="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile" className="rounded-full w-10 h-10"/>
                 </button>
             
                 
-                {isOpen && (
+                {isProfileOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20">
-                    <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
-                    <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
+                    <a href="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
+                    <a href="/settings" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
                     <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
                 </div>
                 )} 
