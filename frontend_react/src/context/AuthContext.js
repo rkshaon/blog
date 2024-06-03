@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState, useEffect} from "react";
+import React, {createContext, useContext, useState, useEffect, useCallback} from "react";
 import { useCookies } from "react-cookie";
 
 const AuthContext = createContext();
@@ -10,13 +10,18 @@ export const useAuth = ()=>{
 export const AuthProvider = ({children})=>{
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
-    useEffect(() => {
+
+    const checkAuth = useCallback(() => {
         if (cookies.token) {
           setIsLoggedIn(true);
         } else {
           setIsLoggedIn(false);
         }
-      }, [cookies]);
+      }, [cookies.token]);
+    
+      useEffect(() => {
+        checkAuth();
+      }, [checkAuth]);
     
       const login = (token) => {
         setCookie('token', token, { path: '/', expires: new Date(Date.now() + 604800000) });
@@ -29,7 +34,7 @@ export const AuthProvider = ({children})=>{
       };
 
       return (
-        <AuthContext.Provider value={{isLoggedIn, login, logout}}>
+        <AuthContext.Provider value={{isLoggedIn, login, logout, checkAuth}}>
             {children}
         </AuthContext.Provider>
       )
