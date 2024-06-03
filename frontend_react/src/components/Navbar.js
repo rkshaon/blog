@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-
+  const {isLoggedIn, logout} = useAuth();
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -42,7 +41,7 @@ const Navbar = () => {
                 <div>
                     <a href="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
                     <a href="/settings" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
-                    <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                    <button onClick={logout} className="px-4 hover:text-gray-400">Logout</button>
                 </div>
                 : 
                     <a href="/signin" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Login</a>
@@ -66,7 +65,7 @@ const Navbar = () => {
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20">
                     <a href="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
                     <a href="/settings" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
-                    <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                    <button onClick={logout} className="px-4 hover:text-gray-400">Logout</button>
                 </div>
                 )} 
             </>
