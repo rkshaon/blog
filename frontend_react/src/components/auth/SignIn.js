@@ -21,13 +21,11 @@ const SignIn = () => {
     // Handle form submission logic here
     try {
       let signIninfo = {
-        //credential: identifier,
-        //password: password,
-        username: 'emilys',
-        password: 'emilyspass',
+        credential: identifier,
+        password: password,
       }
     
-      const response = await fetch('https://dummyjson.com/auth/login', {
+      const response = await fetch('http://127.0.0.1:8000/api/v1/user/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
