@@ -12,12 +12,12 @@ const LeftSidebar = () => {
         <li className="mb-2">
           <Link to="/blog" className="block px-4 py-2 hover:bg-slate-400 rounded transition duration-300">Blog</Link>
         </li>
-        <li className="mb-2">
+        {/*<li className="mb-2">
           <Link to="/signin" className="block px-4 py-2 hover:bg-slate-400 rounded transition duration-300">Sign In</Link>
         </li>
         <li className="mb-2">
           <Link to="/signup" className="block px-4 py-2 hover:bg-slate-400 rounded transition duration-300">Sign Up</Link>
-        </li>
+        </li>*/}
       </ul>
     </aside>
   );

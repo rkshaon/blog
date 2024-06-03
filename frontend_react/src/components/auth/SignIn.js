@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import { useAuth } from '../../context/AuthContext';
 
 const SignIn = () => {
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isSignedIn, setIsSignedIn] = useState(false);
   const [errors, setErrors] = useState([]);
+  const {isLoggedIn,login} = useAuth();
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
   useEffect(() => {
-    if (isSignedIn) {
-      // Redirect to the home page or another page after successful sign-in
+    if (isLoggedIn) {
       navigate('/');
     }
-  }, [isSignedIn, navigate]);
+  }, [isLoggedIn, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
     try {
       let signIninfo = {
-        credential: identifier,
-        password: password
+        //credential: identifier,
+        //password: password,
+        username: 'emilys',
+        password: 'emilyspass',
       }
     
-      const response = await fetch('http://127.0.0.1:8000/api/v1/user/login/', {
+      const response = await fetch('https://dummyjson.com/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,10 +43,11 @@ const SignIn = () => {
 
       const data = await response.json();
       console.log('Sign in successful', data);
-      setCookie('token', data.token, { path: '/', expires: new Date(Date.now() + 604800000) });
-      setIsSignedIn(true);  // Update the state to indicate a successful sign-in
+     
+       // Update the state to indicate a successful sign-in
       // Handle successful sign-in (e.g., store token, etc.)
-
+      login(data.token);
+      navigate('/');
     } catch (err) {
       console.log('login error', err);
       setErrors(err.message.split(', '));
