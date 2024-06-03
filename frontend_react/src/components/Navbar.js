@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import {Link} from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,8 +22,8 @@ const Navbar = () => {
         </div>
         <div className="flex items-center space-x-4">
           <div className="hidden md:flex space-x-4">
-            <a href="/" className="hover:text-gray-300">Home</a>
-            <a href="/blog" className="hover:text-gray-300">Blog</a>
+            <Link to="/" className="hover:text-gray-300">Home</Link>
+            <Link to="/blog" className="hover:text-gray-300">Blog</Link>
           </div>
           <div className="relative">
             <button onClick={toggleMenu} className="focus:outline-none md:hidden">
@@ -32,19 +33,19 @@ const Navbar = () => {
             </button>
             {isOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20 md:hidden">
-                <a href="/" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</a>
-                <a href="/blog" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Blog</a>
+                <Link to="/" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</Link>
+                <Link to="/blog" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Blog</Link>
 
                 <div className="border-t my-2"></div>
                 
                 {isLoggedIn?
                 <div>
-                    <a href="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
-                    <a href="/settings" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
+                    <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</Link>
+                    <Link to="/settings" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</Link>
                     <button onClick={logout} className="px-4 hover:text-gray-400">Logout</button>
                 </div>
                 : 
-                    <a href="/signin" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Login</a>
+                    <Link to="/signin" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Login</Link>
                     }
               </div>
             )}
@@ -52,7 +53,7 @@ const Navbar = () => {
           <div className="relative hidden md:block">
           {!isLoggedIn ?
             <div className="hidden md:flex space-x-4">
-                <a href="/signin" className="hover:text-gray-300">Login</a>
+                <Link to="/signin" className="hover:text-gray-300">Login</Link>
             </div>
             :
             <>
@@ -63,8 +64,8 @@ const Navbar = () => {
                 
                 {isProfileOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20">
-                    <a href="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
-                    <a href="/settings" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
+                    <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</Link>
+                    <Link to="/settings" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</ Link>
                     <button onClick={logout} className="px-4 hover:text-gray-400">Logout</button>
                 </div>
                 )} 
