@@ -7,8 +7,6 @@ const Home = () => {
   const { isLoggedIn } = useAuth();
 
   useEffect(() => {
-    console.log('Token in cookies on home page:', cookies.token);
-    console.log('isLoggedIn state on home page:', isLoggedIn);
   }, [cookies, isLoggedIn]);
 
   return (

@@ -45,7 +45,7 @@ const Navbar = () => {
                     <button onClick={logout} className="px-4 hover:text-gray-400">Logout</button>
                 </div>
                 : 
-                    <Link to="/signin" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Login</Link>
+                    <Link to="/signin" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">SignIn</Link>
                     }
               </div>
             )}
@@ -53,7 +53,7 @@ const Navbar = () => {
           <div className="relative hidden md:block">
           {!isLoggedIn ?
             <div className="hidden md:flex space-x-4">
-                <Link to="/signin" className="hover:text-gray-300">Login</Link>
+                <Link to="/signin" className="hover:text-gray-300">SignIn</Link>
             </div>
             :
             <>
