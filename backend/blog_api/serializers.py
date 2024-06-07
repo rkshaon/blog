@@ -1,7 +1,9 @@
+from django.db.models import Avg
+
 from rest_framework import serializers
 
 from blog_api.models import Blog
-from blog_api.models import BlogComment
+from rating_api.models import Rating
 
 from user_api.serializers import UserSerializer
 
@@ -18,28 +20,14 @@ class BlogSerializer(serializers.ModelSerializer):
 
         if instance.approved_by:
             representation['approved_by'] = UserSerializer(instance.approved_by).data
+            
+        representation['rating'] = avg_rating = Rating.objects.filter(
+            is_deleted=False,
+            blog=instance).aggregate(Avg('rating')).get('rating__avg', None)
+        
+        if representation['rating'] is not None:
+            representation['rating'] = round(representation['rating'], 2)
         
         return representation
 
 
-class BlogCommentSerializer(serializers.ModelSerializer):
-    def validate(self, data):
-        blog = data.get('blog')
-
-        if blog:
-            if blog.is_deleted is True:
-                raise serializers.ValidationError("The blog is deleted.")
-            
-            if blog.blog_status != 'published':
-                raise serializers.ValidationError("The blog is not published yet.")
-            
-            if not blog.is_approved:
-                raise serializers.ValidationError(
-                    "The blog is not approved yet.")
-            
-        return data
-    
-
-    class Meta:
-        fields = '__all__'
-        model = BlogComment

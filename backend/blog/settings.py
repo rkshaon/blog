@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'user_api',
     'blog_api',
+    'comment_api',
+    'rating_api',
 ]
 
 MIDDLEWARE = [
@@ -112,10 +114,10 @@ REST_FRAMEWORK = {
     )
 }
 
-# SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME': 3600,
-# }
-JWT_EXPIRATION_DELTA = datetime.timedelta(hours=1)
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=1),
+}
+# JWT_EXPIRATION_DELTA = datetime.timedelta(hours=1)
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -141,6 +143,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
+    "http://127.0.0.1:8080",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://192.168.31.220:8000",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://192.168.31.220:3000",
 ]
 
 AUTH_USER_MODEL = 'user_api.User'
+
+APPEND_SLASH = False

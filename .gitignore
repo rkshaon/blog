@@ -9,6 +9,12 @@
 /backend/blog_api/__pycache__
 /backend/blog_api/migrations
 /backend/blog_api/urls/__pycache__
+/backend/comment_api/__pycache__
+/backend/comment_api/migrations
+/backend/comment_api/urls/__pycache__
+/backend/rating_api/__pycache__
+/backend/rating_api/migrations
+/backend/rating_api/urls/__pycache__
 
 # frontend
 # Logs
