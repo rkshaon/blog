@@ -6,8 +6,8 @@ const Home = () => {
   const [cookies] = useCookies(['token']);
   const { isLoggedIn } = useAuth();
 
-  useEffect(() => {
-  }, [cookies, isLoggedIn]);
+  //useEffect(() => {
+  //}, [cookies, isLoggedIn]);
 
   return (
     <div className="p-8">
