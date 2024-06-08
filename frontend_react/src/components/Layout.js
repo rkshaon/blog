@@ -12,9 +12,9 @@ const Layout = ({ children }) => (
     <main className="md:row-span-[10] md:col-span-10">
       {children}
     </main>
-    <side className="md:row-span-[10] md:col-span-2 ">
+    <div className="md:row-span-[10] md:col-span-2 ">
       <RightSidebar />
-    </side>
+    </div>
     <footer className="col-span-full">
       <Footer />
     </footer>

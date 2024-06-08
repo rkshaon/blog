@@ -56,8 +56,8 @@ const Home = () => {
     <div className="p-8">
 
       {
-        blogList.map((item)=>(
-          <Card cardItem={item} />
+        blogList.map((item,index)=>(
+          <Card cardItem={item} key={index} />
         ))
       }
     </div>
