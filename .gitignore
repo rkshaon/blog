@@ -75,7 +75,7 @@
 /frontend_react/yarn-error.log*
 
 //environment
-/frontend_react/config
+/frontend_react/src/config
 
 
 

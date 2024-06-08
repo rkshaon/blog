@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import API_BASE_URL from '../../config/environment';
 
 const SignIn = () => {
   const [identifier, setIdentifier] = useState('');
@@ -20,12 +21,16 @@ const SignIn = () => {
     e.preventDefault();
     // Handle form submission logic here
     try {
+      //let signIninfo = {
+      //  credential: identifier,
+      //  password: password,
+      //}
       let signIninfo = {
-        credential: identifier,
+        username: identifier,
         password: password,
       }
-    
-      const response = await fetch('http://127.0.0.1:8000/api/v1/user/login/', {
+
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
