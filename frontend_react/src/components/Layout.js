@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './Navbar';
-import LeftSidebar from './LeftSidebar';
+import RightSidebar from './RightSidebar';
 import Footer from './Footer';
 
 const Layout = ({ children }) => (
@@ -8,12 +8,13 @@ const Layout = ({ children }) => (
     <header className="col-span-full">
       <Navbar />
     </header>
-    <nav className="md:row-span-[10] md:col-span-2">
-      <LeftSidebar />
-    </nav>
+    
     <main className="md:row-span-[10] md:col-span-10">
       {children}
     </main>
+    <div className="md:row-span-[10] md:col-span-2 ">
+      <RightSidebar />
+    </div>
     <footer className="col-span-full">
       <Footer />
     </footer>
