@@ -1,18 +1,26 @@
 import React,{useEffect} from 'react'
 import { useAuth } from '../context/AuthContext';
 import { useCookies } from 'react-cookie';
+import Card from './Blog/Card';
+import { Link } from 'react-router-dom';
 
-const Home = () => {
+const Home = ({blogLists}) => {
   const [cookies] = useCookies(['token']);
   const { isLoggedIn } = useAuth();
 
-  useEffect(() => {
-  }, [cookies, isLoggedIn]);
+  //useEffect(() => {
+  //}, [cookies, isLoggedIn]);
 
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold">Home Page</h1>
-      <p>Welcome to the home page!</p>
+
+      {
+        blogLists.map((item,index)=>(
+          <Link to={`/blog/${item.category}/${item.id}`} key={item.id}>
+           <Card cardItem={item}  />
+          </Link>
+        ))
+      }
     </div>
   );
 }
