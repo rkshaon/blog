@@ -21,14 +21,14 @@ const SignIn = () => {
     e.preventDefault();
     // Handle form submission logic here
     try {
+      let signIninfo = {
+        username: 'emilys',
+        password: 'emilyspass',
+      }
       //let signIninfo = {
-      //  credential: identifier,
+      //  username: identifier,
       //  password: password,
       //}
-      let signIninfo = {
-        username: identifier,
-        password: password,
-      }
 
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
