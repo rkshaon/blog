@@ -7,7 +7,7 @@ Recommended Python Version: `Python 3.10.12` or later, because the project is de
 ## Setup
 Create and activate the virtual environment
 
-[Create/activate Virtual Environment on Windows or Unix/MacOS](https://github.com/rkshaon/software-engineering-preparation/tree/master/Languages/Python/000_environment)
+[Create/activate Virtual Environment on Windows or Unix/MacOS](https://github.com/rkshaon/software-engineering-preparation/tree/master/Languages/Python/environment)
 
 After activating the virtual environment, install the dependecies using the command below:
 
