@@ -13,7 +13,7 @@ const SignUp = () => {
 
 
   return (
-    <div>SignUp</div>
+    <> this is signup page</>
   )
 }
 
