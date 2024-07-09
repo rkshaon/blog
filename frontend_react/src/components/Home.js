@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useCookies } from 'react-cookie';
 import Card from './Blog/Card';
 import { Link } from 'react-router-dom';
+import {BlogForm} from './Form/BlogForm';
 
 const Home = ({blogLists}) => {
   const [cookies] = useCookies(['token']);
@@ -12,7 +13,9 @@ const Home = ({blogLists}) => {
   //}, [cookies, isLoggedIn]);
 
   return (
-    <div className="p-8">
+    <>
+      <BlogForm />
+      <div className="p-8">
 
       {
         blogLists.map((item,index)=>(
@@ -22,6 +25,8 @@ const Home = ({blogLists}) => {
         ))
       }
     </div>
+    </>
+    
   );
 }
 
