@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import API_BASE_URL from '../../config/environment';
 
@@ -22,15 +22,11 @@ const SignIn = () => {
     // Handle form submission logic here
     try {
       let signIninfo = {
-        username: 'emilys',
-        password: 'emilyspass',
+        credential: identifier,
+        password: password,
       }
-      //let signIninfo = {
-      //  username: identifier,
-      //  password: password,
-      //}
 
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/user/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,10 +115,16 @@ const SignIn = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-3 bg-royalblue text-white font-bold bg-emerald-500 rounded hover:bg-blue-600 transition duration-300"
+            className="w-full py-2 bg-royalblue text-white font-bold bg-emerald-500 rounded hover:bg-blue-600 transition duration-300"
           >
             Sign In
           </button>
+          <div className="text-center mt-3">
+            <span className='text-white mr-1'>Don't have an account?</span>
+            <Link to="/signup" className="text-blue-500 hover:underline">
+              SignUp Now
+            </Link>
+          </div>
         </form>
       </div>
     </div>
