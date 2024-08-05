@@ -24,7 +24,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home blogLists={blogLists} />} />
-            <Route path="/blog/:category/:id" element={<ProtectedRoute><Blog blogLists={blogLists} /></ProtectedRoute>} />
+            <Route path="/blog/:id" element={<ProtectedRoute><Blog blogLists={blogLists} /></ProtectedRoute>} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="*" element={<NotFound />} />
