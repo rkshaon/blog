@@ -7,7 +7,7 @@ import {BlogForm} from './Form/BlogForm';
 import API_BASE_URL from '../config/environment';
 
 const Home = () => {
-  const [cookies] = useCookies(['token']);
+  const [cookies] = useCookies(['accessToken']);
   const { isLoggedIn } = useAuth();
   const [blogList, setBlog] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ const Home = () => {
 
   //useEffect(() => {
   //}, [cookies, isLoggedIn]);
-
+  
   useEffect(()=>{
     const fetchBlog = async ()=>{
       try {
@@ -25,7 +25,7 @@ const Home = () => {
           method: "GET",
           headers: {
             'Content-Type': 'application/join',
-            Authorization: `Bearer ${cookies.token}`,
+            Authorization: `Bearer ${cookies.accessToken}`,
           }
         });
         if (!response.ok) {
