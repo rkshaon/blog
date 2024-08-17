@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useCookies } from 'react-cookie';
 import {useAuth} from '../../context/AuthContext';
 import API_BASE_URL from '../../config/environment';
+import { useNavigate } from 'react-router-dom';
 
 export const BlogForm = () => {
     const [cookies]  = useCookies(['token']);
@@ -10,6 +11,7 @@ export const BlogForm = () => {
         title: '',
         content: ''
     })
+    const navigate = useNavigate();
 
     useEffect(() => {
     }, [cookies, isLoggedIn]);
@@ -30,7 +32,7 @@ export const BlogForm = () => {
                 method: "POST", 
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${cookies.token}`,
+                    Authorization: `Bearer ${cookies.accessToken}`,
                 },
                 body: JSON.stringify(blogInfo)
             })
@@ -42,6 +44,9 @@ export const BlogForm = () => {
         
               const data = await response.json();
             //  console.log('blog create successful', data);
+            if(response.ok){
+                navigate('/');
+              }
         } catch (error) {
             console.log('blog submit error: ', error);
         }

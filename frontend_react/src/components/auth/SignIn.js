@@ -45,8 +45,11 @@ const SignIn = () => {
      
        // Update the state to indicate a successful sign-in
       // Handle successful sign-in (e.g., store token, etc.)
-      login(data.access);
-      navigate('/');
+      if(data.access && data.refresh){
+        login(data.access, data.refresh);
+        navigate('/');
+      }
+      
     } catch (err) {
       console.log('login error', err);
       setErrors(err.message.split(', '));

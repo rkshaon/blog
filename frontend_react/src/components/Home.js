@@ -7,7 +7,7 @@ import {BlogForm} from './Form/BlogForm';
 import API_BASE_URL from '../config/environment';
 
 const Home = () => {
-  const [cookies] = useCookies(['token']);
+  const [cookies] = useCookies(['accessToken']);
   const { isLoggedIn } = useAuth();
   const [blogList, setBlog] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ const Home = () => {
 
   //useEffect(() => {
   //}, [cookies, isLoggedIn]);
-
+  
   useEffect(()=>{
     const fetchBlog = async ()=>{
       try {
@@ -24,7 +24,7 @@ const Home = () => {
           method: "GET",
           headers: {
             'Content-Type': 'application/join',
-            Authorization: `Bearer ${cookies.token}`,
+            Authorization: `Bearer ${cookies.accessToken}`,
           }
         });
         if (!response.ok) {
@@ -43,6 +43,7 @@ const Home = () => {
     fetchBlog();
   }, []);
 
+
   if (isLoading) {
     return <div className="text-center">Loading...</div>;
   }
@@ -54,18 +55,16 @@ const Home = () => {
 
   return (
     <>
-      {/*<BlogForm />*/}
-     
-    <div className="container mx-auto px-4">
-      <h1 className="text-3xl font-bold text-center my-8">Blog</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {blogList.map((post) => (
-          <Link to={`/blog/${post.id}`} key={post.id}>
-            <Card cardItem={post}/>
-          </Link>
-        ))}
+      <div className="container mx-auto px-4">
+        <h1 className="text-3xl font-bold text-center my-8">Blog</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {blogList.map((post) => (
+            <Link to={`/blog/${post.id}`} key={post.id}>
+              <Card cardItem={post}/>
+            </Link>
+          ))}
+        </div>
       </div>
-    </div>
     </>
     
   );

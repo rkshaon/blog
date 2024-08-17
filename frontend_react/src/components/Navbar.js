@@ -23,7 +23,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           <div className="hidden md:flex space-x-4">
             <Link to="/" className="hover:text-gray-300">Home</Link>
-            <Link to="/blog" className="hover:text-gray-300">Blog</Link>
+            <Link to="/createblog" className="hover:text-gray-300">Add Blog</Link>
           </div>
           <div className="relative">
             <button onClick={toggleMenu} className="focus:outline-none md:hidden">
@@ -34,7 +34,7 @@ const Navbar = () => {
             {isOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20 md:hidden">
                 <Link to="/" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</Link>
-                <Link to="/blog" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Blog</Link>
+                <Link to="/createblog" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Add Blog</Link>
 
                 <div className="border-t my-2"></div>
                 
