@@ -20,7 +20,7 @@ const Blog = () => {
           method: "GET",
           headers: {
             'Content-Type': 'application/join',
-            Authorization: `Bearer ${cookies.token}`,
+            Authorization: `Bearer ${cookies.accessToken}`,
           }
         });
         if (!response.ok) {
