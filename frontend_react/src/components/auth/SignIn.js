@@ -45,7 +45,7 @@ const SignIn = () => {
      
        // Update the state to indicate a successful sign-in
       // Handle successful sign-in (e.g., store token, etc.)
-      login(data.token);
+      login(data.access);
       navigate('/');
     } catch (err) {
       console.log('login error', err);
