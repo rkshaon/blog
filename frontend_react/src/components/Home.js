@@ -12,7 +12,6 @@ const Home = () => {
   const [blogList, setBlog] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isBlogForm, setBlogForm] = useState(false);
 
   //useEffect(() => {
   //}, [cookies, isLoggedIn]);
@@ -44,9 +43,6 @@ const Home = () => {
     fetchBlog();
   }, []);
 
-  const handleShowBlogLForm = ()=>{
-    setBlogForm(!isBlogForm);
-  }
 
   if (isLoading) {
     return <div className="text-center">Loading...</div>;
@@ -59,20 +55,16 @@ const Home = () => {
 
   return (
     <>
-    <button  onClick={handleShowBlogLForm}>Add Blog</button>
-    {(isBlogForm)?
-    <BlogForm  />
-     :
-    <div className="container mx-auto px-4">
-      <h1 className="text-3xl font-bold text-center my-8">Blog</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {blogList.map((post) => (
-          <Link to={`/blog/${post.id}`} key={post.id}>
-            <Card cardItem={post}/>
-          </Link>
-        ))}
+      <div className="container mx-auto px-4">
+        <h1 className="text-3xl font-bold text-center my-8">Blog</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {blogList.map((post) => (
+            <Link to={`/blog/${post.id}`} key={post.id}>
+              <Card cardItem={post}/>
+            </Link>
+          ))}
+        </div>
       </div>
-    </div>}
     </>
     
   );
