@@ -4,6 +4,7 @@ import API_BASE_URL from '../config/environment';
 import { useAuth } from '../context/AuthContext';
 import { useCookies } from 'react-cookie';
 import { formatDistanceToNow } from 'date-fns';
+import Rating from './Blog/Rating';
 
 
 const Blog = () => {
@@ -14,6 +15,7 @@ const Blog = () => {
   const [error, setError] = useState(null);
   const [newComment, setNewComment] = useState('');
   const [comments, setComments] = useState([]);
+  const [rating, setRating] = useState(0);
 
   useEffect(()=>{
     const fetchBlog = async ()=>{
@@ -33,7 +35,8 @@ const Blog = () => {
         const data = await response.json();
         //console.log('blog response data', data);
         setBlog(data);
-        setComments(...comments, data.comments);
+        setComments(data.comments || []);
+        setRating(data.rating || 0);
         setLoading(false);
 
       } catch (error) {
@@ -42,7 +45,7 @@ const Blog = () => {
       }
     }
     fetchBlog();
-  },[])
+  },[id])
 
   const handleAddComment = async () => {
     if (newComment.trim() === '') {
@@ -73,6 +76,39 @@ const Blog = () => {
         setNewComment('');
     } catch (error) {
       setError('An error occurred while adding the comment');
+    }
+  };
+
+  const handleAddRating = async () => {
+    if (rating === 0) {
+      setError('Please select a rating');
+      return;
+    }
+
+    try {
+      const ratingInfo = {
+        rating: rating,
+        blog: id
+      }
+      const url = `${API_BASE_URL}/api/v1/rating/`
+      const response = await fetch(url, {
+        method: "POST",
+        headers:{
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookies.accessToken}`,
+        },
+        body: JSON.stringify(ratingInfo),
+      })
+
+      if (!response.ok) {
+        let res = await response.json();
+        throw new Error(res.error);
+      }
+      const data = await response.json();
+      //console.log('comment response data', data);
+      //setRating(0);
+    } catch (error) {
+      setError('An error occurred while adding the rating');
     }
   };
  
@@ -130,6 +166,12 @@ const Blog = () => {
               Add Comment
             </button>
           </div>
+        
+          <div className="mt-6">
+            <h3 className="text-lg font-semibold mb-2">Rate this Blog:</h3>
+            <Rating rating={rating} onRating={handleAddRating} />
+          </div>
+
         </div>
       )}
     </div>

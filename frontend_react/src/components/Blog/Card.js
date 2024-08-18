@@ -29,8 +29,8 @@ const Card = ({ cardItem }) => {
             <span className="font-bold">{cardItem.comments && cardItem.comments.length}</span> Comments
           </div>
           <div className="flex items-center text-gray-700">
-            <FontAwesomeIcon icon={faStar} className="mr-2" />
-            <span className="font-bold">{cardItem.ratings}</span> Ratings
+            <FontAwesomeIcon icon={faStar} className="mr-1" />
+            <span className="font-bold">{cardItem.rating}</span> Ratings
           </div>
         </div>
       </div>
