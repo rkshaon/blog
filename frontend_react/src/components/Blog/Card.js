@@ -26,7 +26,7 @@ const Card = ({ cardItem }) => {
         <div className="px-6 py-4 flex flex-wrap justify-between items-center border-t border-gray-200">
           <div className="flex items-center text-gray-700 mb-2 md:mb-0">
             <FontAwesomeIcon icon={faComments} className="mr-2" />
-            <span className="font-bold">{cardItem.comments}</span> Comments
+            <span className="font-bold">{cardItem.comments && cardItem.comments.length}</span> Comments
           </div>
           <div className="flex items-center text-gray-700">
             <FontAwesomeIcon icon={faStar} className="mr-2" />
